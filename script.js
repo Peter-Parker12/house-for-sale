@@ -6,22 +6,44 @@ function populateContent() {
   document.getElementById("hero-price").textContent = d.price;
   document.getElementById("hero-address").textContent = `${d.address}, ${d.cityStateZip}`;
   document.getElementById("hero-status").textContent = d.status;
+  document.getElementById("hero-tagline").textContent = d.tagline;
   document.getElementById("footer-address").textContent = `${d.address}, ${d.cityStateZip}`;
+
+  document.getElementById("topbar-phone-text").textContent = d.agent.phone;
+  document.getElementById("topbar-phone").href = `tel:${d.agent.phone.replace(/[^\d+]/g, "")}`;
+  document.getElementById("topbar-email-text").textContent = d.agent.email;
+  document.getElementById("topbar-email").href = `mailto:${d.agent.email}`;
 
   document.getElementById("fact-beds").textContent = d.beds;
   document.getElementById("fact-baths").textContent = d.baths;
+  document.getElementById("fact-parking").textContent = d.parking;
   document.getElementById("fact-sqft").textContent = d.sqft;
-  document.getElementById("fact-lot").textContent = d.lot;
-  document.getElementById("fact-year").textContent = d.yearBuilt;
+  document.getElementById("fine-print").textContent = `Built ${d.yearBuilt} · ${d.lot} lot`;
 
   document.getElementById("description").textContent = d.description;
 
-  const featuresList = document.getElementById("features-list");
-  featuresList.innerHTML = "";
+  const roomsGrid = document.getElementById("rooms-grid");
+  roomsGrid.innerHTML = "";
+  d.rooms.forEach((room) => {
+    const card = document.createElement("div");
+    card.className = "room-card";
+    card.innerHTML = `
+      <div class="room-photo" style="background-image:url('assets/images/rooms/${room.image}')"></div>
+      <div class="room-body">
+        <p class="room-name">${room.name}</p>
+        <p class="room-caption">${room.caption}</p>
+      </div>
+    `;
+    roomsGrid.appendChild(card);
+  });
+
+  const featuresGrid = document.getElementById("features-grid");
+  featuresGrid.innerHTML = "";
   d.features.forEach((feature) => {
-    const li = document.createElement("li");
-    li.textContent = feature;
-    featuresList.appendChild(li);
+    const item = document.createElement("div");
+    item.className = "feature-item";
+    item.innerHTML = `<i class="ti ti-${feature.icon}" aria-hidden="true"></i><span>${feature.label}</span>`;
+    featuresGrid.appendChild(item);
   });
 
   const initials = d.agent.name
@@ -36,25 +58,31 @@ function populateContent() {
   document.getElementById("map-frame").src =
     `https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery)}&output=embed`;
 
-  const heroImg = new Image();
-  heroImg.onload = () => {
-    document.getElementById("hero-photo").style.backgroundImage = `url(assets/images/hero.jpg)`;
+  loadBackgroundPhoto("assets/images/hero.jpg", "hero-photo");
+  loadBackgroundPhoto("assets/images/about.jpg", "about-photo", "assets/images/hero.jpg");
+}
+
+function loadBackgroundPhoto(src, elementId, fallbackSrc) {
+  const img = new Image();
+  img.onload = () => {
+    document.getElementById(elementId).style.backgroundImage = `url(${src})`;
   };
-  heroImg.src = "assets/images/hero.jpg";
+  img.onerror = () => {
+    if (fallbackSrc) loadBackgroundPhoto(fallbackSrc, elementId);
+  };
+  img.src = src;
 }
 
 function loadGallery() {
   const grid = document.getElementById("gallery-grid");
   const emptyNote = document.getElementById("gallery-empty");
   const maxPhotos = 30;
-  let found = 0;
 
   function tryLoad(i) {
     if (i > maxPhotos) return;
     const src = `assets/images/gallery/${i}.jpg`;
     const img = new Image();
     img.onload = () => {
-      found += 1;
       if (emptyNote) emptyNote.remove();
       const frame = document.createElement("div");
       frame.className = "frame gallery-frame";
@@ -85,17 +113,11 @@ document.getElementById("lightbox").addEventListener("click", () => {
   document.getElementById("lightbox").classList.remove("open");
 });
 
-document.getElementById("contact-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const note = document.getElementById("form-note");
-  const form = e.target;
-
+async function sendInquiry({ form, note, subject, body }) {
   if (!propertyData.formspreeId) {
-    const subject = encodeURIComponent(`Showing request: ${propertyData.address}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name.value}\nEmail: ${form.email.value}\n\n${form.message.value}`
-    );
-    window.location.href = `mailto:${propertyData.agent.email}?subject=${subject}&body=${body}`;
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+    window.location.href = `mailto:${propertyData.agent.email}?subject=${encodedSubject}&body=${encodedBody}`;
     return;
   }
 
@@ -115,6 +137,28 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   } catch {
     note.textContent = "Something went wrong. Please try again.";
   }
+}
+
+document.getElementById("contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const form = e.target;
+  sendInquiry({
+    form,
+    note: document.getElementById("form-note"),
+    subject: `Inquiry: ${propertyData.address}`,
+    body: `Name: ${form.name.value}\nEmail: ${form.email.value}\n\n${form.message.value}`,
+  });
+});
+
+document.getElementById("tour-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const form = e.target;
+  sendInquiry({
+    form,
+    note: document.getElementById("tour-note"),
+    subject: `Tour request: ${propertyData.address}`,
+    body: `Name: ${form.name.value}\nPhone: ${form.phone.value}\nPreferred date: ${form.date.value}`,
+  });
 });
 
 populateContent();

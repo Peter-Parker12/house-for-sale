@@ -4,14 +4,19 @@ A single-page listing site with no build step. Deployed via GitHub Pages.
 
 ## Editing the listing
 
-All content (price, address, beds/baths, description, features, agent info)
-lives in [`data.js`](data.js) — edit that file, no HTML/CSS knowledge needed.
+All content (price, address, beds/baths, description, rooms, features, agent
+info) lives in [`data.js`](data.js) — edit that file, no HTML/CSS knowledge
+needed. Feature icons use [Tabler icon](https://tabler.io/icons) names.
 
 ## Adding photos
 
 Drop your images into `assets/images/`:
 
 - **Hero photo** (the big banner at the top): save it as `assets/images/hero.jpg`.
+- **About photo** (next to the description): save it as `assets/images/about.jpg`.
+  Optional — falls back to the hero photo if missing.
+- **Room photos**: save them in `assets/images/rooms/` and reference the
+  filename in each entry of the `rooms` array in `data.js`.
 - **Gallery photos**: save them in `assets/images/gallery/` named `1.jpg`,
   `2.jpg`, `3.jpg`, etc. — sequential, starting at 1, no gaps. They'll show up
   automatically in the order you number them.
