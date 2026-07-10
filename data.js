@@ -1,16 +1,14 @@
 const propertyData = {
   status: "For sale",
-  price: "$685,000",
+  price: "14 tỷ ₫",
   address: "123 Maple Street",
   cityStateZip: "Springfield, IL 62704",
   tagline: "A sunlit 1920s colonial in the heart of Springfield",
 
-  beds: 4,
-  baths: 3,
-  parking: 2,
-  sqft: "2,400",
-  lot: "0.3 acre",
-  yearBuilt: 1998,
+  beds: 8,
+  baths: 7,
+  floors: "5 + rooftop",
+  floorArea: "300 m²",
 
   description:
     "Replace this with two or three sentences describing the home — style, recent updates, standout rooms, and what makes the neighborhood great.",
@@ -30,7 +28,7 @@ const propertyData = {
     { icon: "sun", label: "Rooftop terrace" },
     { icon: "building", label: "Corner lot" },
     { icon: "bulb", label: "New construction" },
-    { icon: "car", label: "Street parking" },
+    { icon: "snowflake", label: "6 A/C units" },
   ],
 
   mapQuery: "123 Maple Street, Springfield, IL 62704",

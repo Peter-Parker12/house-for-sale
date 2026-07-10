@@ -16,9 +16,8 @@ function populateContent() {
 
   document.getElementById("fact-beds").textContent = d.beds;
   document.getElementById("fact-baths").textContent = d.baths;
-  document.getElementById("fact-parking").textContent = d.parking;
-  document.getElementById("fact-sqft").textContent = d.sqft;
-  document.getElementById("fine-print").textContent = `Built ${d.yearBuilt} · ${d.lot} lot`;
+  document.getElementById("fact-floors").textContent = d.floors;
+  document.getElementById("fact-floorarea").textContent = d.floorArea;
 
   document.getElementById("description").textContent = d.description;
 
