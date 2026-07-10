@@ -17,19 +17,20 @@ const propertyData = {
 
   // One card per room. Photos go in assets/images/rooms/<image>.
   rooms: [
-    { image: "living-room.jpg", name: "Living room", caption: "Original fireplace, south-facing light" },
-    { image: "kitchen.jpg", name: "Kitchen", caption: "Rebuilt 2022, quartz counters" },
-    { image: "primary-suite.jpg", name: "Primary suite", caption: "Walk-in closet, garden view" },
+    { image: "living-room.jpg", name: "Living room", caption: "Replace with a real caption" },
+    { image: "bedroom.jpg", name: "Bedroom", caption: "Replace with a real caption" },
+    { image: "bathroom.jpg", name: "Bathroom", caption: "Replace with a real caption" },
+    { image: "rooftop-terrace.jpg", name: "Rooftop terrace", caption: "Replace with a real caption" },
   ],
 
   // Tabler icon names (without the "ti-" prefix) — browse icons at tabler.io/icons
   features: [
-    { icon: "flame", label: "Fireplace" },
-    { icon: "trees", label: "Garden" },
-    { icon: "car-garage", label: "Garage" },
-    { icon: "sun", label: "South-facing" },
-    { icon: "snowflake", label: "Central air" },
-    { icon: "wash-dryclean", label: "Laundry room" },
+    { icon: "elevator", label: "Private elevator" },
+    { icon: "stairs", label: "Marble staircase" },
+    { icon: "sun", label: "Rooftop terrace" },
+    { icon: "building", label: "Corner lot" },
+    { icon: "bulb", label: "New construction" },
+    { icon: "car", label: "Street parking" },
   ],
 
   mapQuery: "123 Maple Street, Springfield, IL 62704",
