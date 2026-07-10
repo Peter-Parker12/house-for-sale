@@ -33,7 +33,8 @@ const propertyData = {
     { icon: "snowflake", label: "6 điều hòa" },
   ],
 
-  mapQuery: "Số 23, ngách 309/16 đường Nguyễn Đức Thuận, Xã Gia Lâm, Hà Nội",
+  // Tọa độ chính xác lấy từ link Google Maps, đảm bảo ghim đúng vị trí
+  mapQuery: "21.0086932,105.9560685",
 
   agent: {
     name: "Ngọc Hoa",

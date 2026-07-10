@@ -76,7 +76,7 @@ function populateContent() {
     : d.agent.phone;
 
   document.getElementById("map-frame").src =
-    `https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery)}&output=embed`;
+    `https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery)}&z=18&output=embed`;
 
   loadBackgroundPhoto("assets/images/hero.jpg", "hero-photo");
   loadBackgroundPhoto("assets/images/about.jpg", "about-photo", "assets/images/hero.jpg");
