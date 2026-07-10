@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>123 Maple Street | For Sale</title>
+  <meta name="description" content="4 bed, 3 bath home for sale at 123 Maple Street, Springfield." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <span class="nav-brand" id="nav-address">123 Maple Street</span>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#features">Features</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="hero-overlay">
+      <p class="hero-price" id="hero-price">$685,000</p>
+      <p class="hero-address" id="hero-address">123 Maple Street, Springfield, IL 62704</p>
+      <span class="badge" id="hero-status">For sale</span>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div class="fact">
+      <p class="fact-value" id="fact-beds">4</p>
+      <p class="fact-label">Beds</p>
+    </div>
+    <div class="fact">
+      <p class="fact-value" id="fact-baths">3</p>
+      <p class="fact-label">Baths</p>
+    </div>
+    <div class="fact">
+      <p class="fact-value" id="fact-sqft">2,400</p>
+      <p class="fact-label">Sq ft</p>
+    </div>
+    <div class="fact">
+      <p class="fact-value" id="fact-lot">0.3 acre</p>
+      <p class="fact-label">Lot</p>
+    </div>
+    <div class="fact">
+      <p class="fact-value" id="fact-year">1998</p>
+      <p class="fact-label">Built</p>
+    </div>
+  </section>
+
+  <section class="section" id="overview">
+    <h2>About this home</h2>
+    <p id="description">Loading description...</p>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-grid" id="gallery-grid">
+      <p class="gallery-empty" id="gallery-empty">
+        No photos yet — drop images into <code>assets/images/gallery/</code> named
+        <code>1.jpg</code>, <code>2.jpg</code>, etc.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>Features</h2>
+    <ul class="features-list" id="features-list"></ul>
+  </section>
+
+  <section class="section" id="location">
+    <h2>Location</h2>
+    <div class="map-wrap">
+      <iframe
+        id="map-frame"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <h2>Contact</h2>
+    <div class="agent">
+      <div class="agent-avatar" id="agent-initials">JD</div>
+      <div>
+        <p class="agent-name" id="agent-name">Jane Doe, listing agent</p>
+        <p class="agent-details" id="agent-details">(555) 010-0182 · jane@email.com</p>
+      </div>
+    </div>
+
+    <form id="contact-form" class="contact-form">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+      </div>
+      <textarea name="message" placeholder="I'm interested in this property..." required></textarea>
+      <button type="submit">Request a showing</button>
+      <p class="form-note" id="form-note"></p>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <p id="footer-address">123 Maple Street, Springfield, IL 62704</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
