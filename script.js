@@ -38,7 +38,7 @@ function populateContent() {
 
   const heroImg = new Image();
   heroImg.onload = () => {
-    document.getElementById("hero").style.backgroundImage = `url(assets/images/hero.jpg)`;
+    document.getElementById("hero-photo").style.backgroundImage = `url(assets/images/hero.jpg)`;
   };
   heroImg.src = "assets/images/hero.jpg";
 }
@@ -56,11 +56,14 @@ function loadGallery() {
     img.onload = () => {
       found += 1;
       if (emptyNote) emptyNote.remove();
+      const frame = document.createElement("div");
+      frame.className = "frame gallery-frame";
       const el = document.createElement("img");
       el.src = src;
       el.alt = `Property photo ${i}`;
-      el.addEventListener("click", () => openLightbox(src));
-      grid.appendChild(el);
+      frame.appendChild(el);
+      frame.addEventListener("click", () => openLightbox(src));
+      grid.appendChild(frame);
       tryLoad(i + 1);
     };
     img.onerror = () => {
