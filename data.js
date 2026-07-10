@@ -11,16 +11,16 @@ const propertyData = {
   floorArea: "300 m²",
 
   description:
-    "Thay bằng 2-3 câu mô tả về căn nhà — phong cách thiết kế, nội thất, điểm nổi bật và khu vực xung quanh.",
+    "Nhà mới xây 5 tầng 1 tum, thiết kế hiện đại với thang máy riêng và cầu thang ốp đá marble sang trọng. Sân thượng rộng có mái kính lấy sáng, view thoáng toàn cảnh khu vực. Nhà góc 2 mặt thoáng, phòng thờ trang trọng riêng biệt, sẵn sàng vào ở ngay.",
 
   // Mỗi phòng có thể có 1-2 ảnh, lấy trực tiếp từ assets/images/gallery/<số>.jpg
   rooms: [
-    { images: ["gallery/7.jpg", "gallery/8.jpg"], name: "Phòng khách", caption: "Thay bằng mô tả thật" },
-    { images: ["gallery/6.jpg"], name: "Bếp", caption: "Thay bằng mô tả thật" },
-    { images: ["gallery/10.jpg", "gallery/11.jpg"], name: "Phòng ngủ", caption: "Thay bằng mô tả thật" },
-    { images: ["gallery/12.jpg", "gallery/13.jpg"], name: "Phòng tắm", caption: "Thay bằng mô tả thật" },
-    { images: ["gallery/22.jpg", "gallery/23.jpg"], name: "Phòng thờ", caption: "Thay bằng mô tả thật" },
-    { images: ["gallery/24.jpg", "gallery/25.jpg"], name: "Sân thượng", caption: "Thay bằng mô tả thật" },
+    { images: ["gallery/7.jpg", "gallery/8.jpg"], name: "Phòng khách", caption: "Không gian tiếp khách rộng rãi, sàn gỗ ấm cúng" },
+    { images: ["gallery/6.jpg"], name: "Bếp", caption: "Bếp liền phòng khách, tủ bếp kịch trần, đầy đủ thiết bị" },
+    { images: ["gallery/10.jpg", "gallery/11.jpg"], name: "Phòng ngủ", caption: "Thoáng sáng, sàn gỗ, cửa sổ lớn đón view thành phố" },
+    { images: ["gallery/12.jpg", "gallery/13.jpg"], name: "Phòng tắm", caption: "Thiết kế hiện đại, khu tắm đứng riêng biệt, ốp đá cao cấp" },
+    { images: ["gallery/22.jpg", "gallery/23.jpg"], name: "Phòng thờ", caption: "Không gian thờ cúng trang trọng, gỗ chạm khắc tinh xảo" },
+    { images: ["gallery/24.jpg", "gallery/25.jpg"], name: "Sân thượng", caption: "Rộng rãi, mái kính lấy sáng, view toàn cảnh thành phố" },
   ],
 
   // Tên icon Tabler (không có tiền tố "ti-") — xem thêm tại tabler.io/icons
