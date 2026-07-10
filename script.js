@@ -1,3 +1,6 @@
+let galleryImages = [];
+let lightboxIndex = 0;
+
 function populateContent() {
   const d = propertyData;
 
@@ -26,13 +29,24 @@ function populateContent() {
   d.rooms.forEach((room) => {
     const card = document.createElement("div");
     card.className = "room-card";
-    card.innerHTML = `
-      <div class="room-photo" style="background-image:url('assets/images/rooms/${room.image}')"></div>
-      <div class="room-body">
-        <p class="room-name">${room.name}</p>
-        <p class="room-caption">${room.caption}</p>
-      </div>
-    `;
+
+    const photos = document.createElement("div");
+    photos.className = "room-photos";
+    photos.style.gridTemplateColumns = `repeat(${room.images.length}, 1fr)`;
+    room.images.forEach((image) => {
+      const photo = document.createElement("div");
+      photo.className = "room-photo";
+      photo.style.backgroundImage = `url('assets/images/${image}')`;
+      photo.addEventListener("click", () => openLightboxByPath(image));
+      photos.appendChild(photo);
+    });
+
+    const body = document.createElement("div");
+    body.className = "room-body";
+    body.innerHTML = `<p class="room-name">${room.name}</p><p class="room-caption">${room.caption}</p>`;
+
+    card.appendChild(photos);
+    card.appendChild(body);
     roomsGrid.appendChild(card);
   });
 
@@ -51,7 +65,7 @@ function populateContent() {
     .join("")
     .toUpperCase();
   document.getElementById("agent-initials").textContent = initials;
-  document.getElementById("agent-name").textContent = `${d.agent.name}, listing agent`;
+  document.getElementById("agent-name").textContent = `${d.agent.name} · Người liên hệ`;
   document.getElementById("agent-details").textContent = `${d.agent.phone} · ${d.agent.email}`;
 
   document.getElementById("map-frame").src =
@@ -83,13 +97,16 @@ function loadGallery() {
     const img = new Image();
     img.onload = () => {
       if (emptyNote) emptyNote.remove();
+      const index = galleryImages.length;
+      galleryImages.push(src);
+
       const frame = document.createElement("div");
       frame.className = "frame gallery-frame";
       const el = document.createElement("img");
       el.src = src;
-      el.alt = `Property photo ${i}`;
+      el.alt = `Ảnh nhà ${i}`;
       frame.appendChild(el);
-      frame.addEventListener("click", () => openLightbox(src));
+      frame.addEventListener("click", () => openLightbox(index));
       grid.appendChild(frame);
       tryLoad(i + 1);
     };
@@ -102,14 +119,83 @@ function loadGallery() {
   tryLoad(1);
 }
 
-function openLightbox(src) {
-  const lightbox = document.getElementById("lightbox");
+function openLightboxByPath(relativePath) {
+  const src = `assets/images/${relativePath}`;
+  const index = galleryImages.indexOf(src);
+  if (index >= 0) {
+    openLightbox(index);
+    return;
+  }
+  // Gallery probe hasn't reached this photo yet — show it standalone.
+  lightboxIndex = 0;
   document.getElementById("lightbox-img").src = src;
-  lightbox.classList.add("open");
+  document.getElementById("lightbox-prev").style.display = "none";
+  document.getElementById("lightbox-next").style.display = "none";
+  document.getElementById("lightbox").classList.add("open");
 }
 
-document.getElementById("lightbox").addEventListener("click", () => {
+function openLightbox(index) {
+  if (index < 0 || galleryImages.length === 0) return;
+  lightboxIndex = index;
+  showLightboxImage();
+  document.getElementById("lightbox").classList.add("open");
+}
+
+function showLightboxImage() {
+  document.getElementById("lightbox-img").src = galleryImages[lightboxIndex];
+  const multiple = galleryImages.length > 1;
+  document.getElementById("lightbox-prev").style.display = multiple ? "flex" : "none";
+  document.getElementById("lightbox-next").style.display = multiple ? "flex" : "none";
+}
+
+function closeLightbox() {
   document.getElementById("lightbox").classList.remove("open");
+}
+
+function showNextImage() {
+  lightboxIndex = (lightboxIndex + 1) % galleryImages.length;
+  showLightboxImage();
+}
+
+function showPrevImage() {
+  lightboxIndex = (lightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+  showLightboxImage();
+}
+
+const lightboxEl = document.getElementById("lightbox");
+
+lightboxEl.addEventListener("click", (e) => {
+  if (e.target === lightboxEl) closeLightbox();
+});
+document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+document.getElementById("lightbox-next").addEventListener("click", (e) => {
+  e.stopPropagation();
+  showNextImage();
+});
+document.getElementById("lightbox-prev").addEventListener("click", (e) => {
+  e.stopPropagation();
+  showPrevImage();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (!lightboxEl.classList.contains("open")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") showNextImage();
+  if (e.key === "ArrowLeft") showPrevImage();
+});
+
+let touchStartX = null;
+lightboxEl.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+});
+lightboxEl.addEventListener("touchend", (e) => {
+  if (touchStartX === null) return;
+  const deltaX = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(deltaX) > 50) {
+    if (deltaX < 0) showNextImage();
+    else showPrevImage();
+  }
+  touchStartX = null;
 });
 
 async function sendInquiry({ form, note, subject, body }) {
@@ -120,7 +206,7 @@ async function sendInquiry({ form, note, subject, body }) {
     return;
   }
 
-  note.textContent = "Sending...";
+  note.textContent = "Đang gửi...";
   try {
     const res = await fetch(`https://formspree.io/f/${propertyData.formspreeId}`, {
       method: "POST",
@@ -128,13 +214,13 @@ async function sendInquiry({ form, note, subject, body }) {
       body: new FormData(form),
     });
     if (res.ok) {
-      note.textContent = "Thanks — we'll be in touch soon.";
+      note.textContent = "Cảm ơn — chúng tôi sẽ liên hệ sớm.";
       form.reset();
     } else {
-      note.textContent = "Something went wrong. Please try again.";
+      note.textContent = "Có lỗi xảy ra, vui lòng thử lại.";
     }
   } catch {
-    note.textContent = "Something went wrong. Please try again.";
+    note.textContent = "Có lỗi xảy ra, vui lòng thử lại.";
   }
 }
 
@@ -144,8 +230,8 @@ document.getElementById("contact-form").addEventListener("submit", (e) => {
   sendInquiry({
     form,
     note: document.getElementById("form-note"),
-    subject: `Inquiry: ${propertyData.address}`,
-    body: `Name: ${form.name.value}\nEmail: ${form.email.value}\n\n${form.message.value}`,
+    subject: `Liên hệ: ${propertyData.address}`,
+    body: `Họ tên: ${form.name.value}\nEmail: ${form.email.value}\n\n${form.message.value}`,
   });
 });
 
@@ -155,8 +241,8 @@ document.getElementById("tour-form").addEventListener("submit", (e) => {
   sendInquiry({
     form,
     note: document.getElementById("tour-note"),
-    subject: `Tour request: ${propertyData.address}`,
-    body: `Name: ${form.name.value}\nPhone: ${form.phone.value}\nPreferred date: ${form.date.value}`,
+    subject: `Đặt lịch xem nhà: ${propertyData.address}`,
+    body: `Họ tên: ${form.name.value}\nSố điện thoại: ${form.phone.value}\nNgày mong muốn: ${form.date.value}`,
   });
 });
 
