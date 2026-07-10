@@ -7,8 +7,8 @@
   --green-deep: #445b3d;
   --green-soft: #e3e8dc;
   --line: #e6e2d3;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Jost", "Segoe UI", sans-serif;
+  --font-serif: "Be Vietnam Pro", "Segoe UI", sans-serif;
+  --font-sans: "Be Vietnam Pro", "Segoe UI", sans-serif;
 }
 
 * {
@@ -34,7 +34,7 @@ a {
 
 h2 {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 28px;
   margin: 4px 0 16px;
 }
@@ -91,6 +91,7 @@ h2 {
 
 .nav-brand {
   font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 17px;
   letter-spacing: 0.02em;
 }
@@ -182,6 +183,7 @@ h2 {
 
 .price {
   font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 44px;
   margin: 16px 0 4px;
 }
@@ -319,6 +321,7 @@ h2 {
 
 .fact span {
   font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 16px;
   color: var(--ink);
 }
@@ -372,6 +375,7 @@ h2 {
 .room-name {
   margin: 0;
   font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 16px;
 }
 
@@ -465,6 +469,7 @@ h2 {
   align-items: center;
   justify-content: center;
   font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 15px;
   flex-shrink: 0;
 }
