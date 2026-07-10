@@ -14,8 +14,13 @@ function populateContent() {
 
   document.getElementById("topbar-phone-text").textContent = d.agent.phone;
   document.getElementById("topbar-phone").href = `tel:${d.agent.phone.replace(/[^\d+]/g, "")}`;
-  document.getElementById("topbar-email-text").textContent = d.agent.email;
-  document.getElementById("topbar-email").href = `mailto:${d.agent.email}`;
+  const topbarEmail = document.getElementById("topbar-email");
+  if (d.agent.email) {
+    document.getElementById("topbar-email-text").textContent = d.agent.email;
+    topbarEmail.href = `mailto:${d.agent.email}`;
+  } else {
+    topbarEmail.style.display = "none";
+  }
 
   document.getElementById("fact-beds").textContent = d.beds;
   document.getElementById("fact-baths").textContent = d.baths;
@@ -66,7 +71,9 @@ function populateContent() {
     .toUpperCase();
   document.getElementById("agent-initials").textContent = initials;
   document.getElementById("agent-name").textContent = `${d.agent.name} · Người liên hệ`;
-  document.getElementById("agent-details").textContent = `${d.agent.phone} · ${d.agent.email}`;
+  document.getElementById("agent-details").textContent = d.agent.email
+    ? `${d.agent.phone} · ${d.agent.email}`
+    : d.agent.phone;
 
   document.getElementById("map-frame").src =
     `https://www.google.com/maps?q=${encodeURIComponent(d.mapQuery)}&output=embed`;
@@ -199,6 +206,11 @@ lightboxEl.addEventListener("touchend", (e) => {
 });
 
 async function sendInquiry({ form, note, subject, body }) {
+  if (!propertyData.formspreeId && !propertyData.agent.email) {
+    note.textContent = `Vui lòng gọi trực tiếp ${propertyData.agent.phone} để được hỗ trợ nhanh nhất.`;
+    return;
+  }
+
   if (!propertyData.formspreeId) {
     const encodedSubject = encodeURIComponent(subject);
     const encodedBody = encodeURIComponent(body);

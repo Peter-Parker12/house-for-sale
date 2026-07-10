@@ -1,8 +1,8 @@
 const propertyData = {
   status: "Đang bán",
   price: "14 tỷ VND",
-  address: "Địa chỉ nhà",
-  cityStateZip: "Cập nhật khu vực, thành phố",
+  address: "Số 23, ngách 309/16 đường Nguyễn Đức Thuận",
+  cityStateZip: "Xã Gia Lâm, Hà Nội",
   tagline: "Nhà mới xây, 5 tầng 1 tum, đầy đủ nội thất",
 
   beds: 8,
@@ -33,12 +33,13 @@ const propertyData = {
     { icon: "snowflake", label: "6 điều hòa" },
   ],
 
-  mapQuery: "Nhập địa chỉ đầy đủ ở đây",
+  mapQuery: "Số 23, ngách 309/16 đường Nguyễn Đức Thuận, Xã Gia Lâm, Hà Nội",
 
   agent: {
-    name: "Tên người liên hệ",
-    phone: "(0) 000 000 000",
-    email: "email@example.com",
+    name: "Ngọc Hoa",
+    phone: "0989 812 007",
+    // Chưa có email — form sẽ hướng người xem gọi trực tiếp số điện thoại.
+    email: "",
   },
 
   // Formspree endpoint id (từ formspree.io). Để trống để dùng mailto thay thế
