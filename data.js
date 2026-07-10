@@ -1,6 +1,6 @@
 const propertyData = {
   status: "Đang bán",
-  price: "14 tỷ ₫",
+  price: "14 tỷ VND",
   address: "Địa chỉ nhà",
   cityStateZip: "Cập nhật khu vực, thành phố",
   tagline: "Nhà mới xây, 5 tầng 1 tum, đầy đủ nội thất",
