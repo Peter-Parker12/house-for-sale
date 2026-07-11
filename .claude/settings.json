@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nohup npx --yes serve . -l 8070)",
+      "Bash(curl -s http://localhost:8070/index.html)",
+      "Bash(curl -s http://localhost:8070/data.js)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8070/script.js)",
+      "Bash(curl -s http://localhost:8070/script.js)",
+      "Bash(curl -s http://localhost:8070/styles.css)",
+      "Bash(curl -sv http://localhost:8070/index.html)",
+      "Bash(curl -sL http://localhost:8070/)",
+      "Bash(pkill -f \"serve . -l 8070\")"
+    ]
+  }
+}
