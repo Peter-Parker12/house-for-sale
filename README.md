@@ -26,6 +26,27 @@ Drop your images into `assets/images/`:
 Any `.jpg` works, but keep files under ~1–2MB each (resize/compress large
 phone photos) so the page loads quickly.
 
+## Editing the floor plan
+
+The `floorPlans` array in `data.js` drives the "Mặt bằng" (floor plan)
+section — one entry per floor, each with a `rooms` array of simple
+rectangles:
+
+```js
+{ name: "Phòng ngủ 1", x: 0, y: 0, width: 350, height: 440, roomRef: "Phòng ngủ" }
+```
+
+- `x`, `y`, `width`, `height` are in centimeters, positioned inside each
+  floor's `viewBox` (500×1200 by default — a schematic 5m × 12m footprint).
+  These are illustrative, not architectural — adjust freely to roughly match
+  the real layout.
+- `roomRef` is optional and must exactly match a `name` in the `rooms[]`
+  array above — clicking that room on the floor plan opens the matching
+  photo. Leave it out if the room has no specific photo.
+- `type: "core"` marks non-clickable structural space (stairwell/elevator).
+  `type: "outdoor"` marks a balcony/terrace (renders with a dashed border).
+  Leave `type` out for a normal room.
+
 ## Contact form
 
 By default, the form opens the visitor's email client (`mailto:`) addressed

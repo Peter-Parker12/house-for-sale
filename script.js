@@ -1,5 +1,6 @@
 let galleryImages = [];
 let lightboxIndex = 0;
+let activeFloorIndex = 0;
 
 function populateContent() {
   const d = propertyData;
@@ -80,6 +81,94 @@ function populateContent() {
 
   loadBackgroundPhoto("assets/images/hero.jpg", "hero-photo");
   loadBackgroundPhoto("assets/images/about.jpg", "about-photo", "assets/images/hero.jpg");
+}
+
+function renderFloorPlans() {
+  const d = propertyData;
+  if (!d.floorPlans || d.floorPlans.length === 0) return;
+
+  const tabsEl = document.getElementById("floorplan-tabs");
+  const svgWrap = document.getElementById("floorplan-svg-wrap");
+  const listEl = document.getElementById("floorplan-list");
+
+  function roomClass(room) {
+    const classes = ["fp-room"];
+    if (room.type === "core") classes.push("fp-room--core");
+    if (room.type === "outdoor") classes.push("fp-room--outdoor");
+    if (room.roomRef) classes.push("fp-room--clickable");
+    return classes.join(" ");
+  }
+
+  function fontSizeFor(room) {
+    return Math.max(12, Math.min(28, room.width / 9, room.height / 3));
+  }
+
+  function findPhoto(roomRef) {
+    const target = d.rooms.find((r) => r.name === roomRef);
+    return target && target.images.length ? target.images[0] : null;
+  }
+
+  function renderTabs() {
+    tabsEl.innerHTML = "";
+    d.floorPlans.forEach((floor, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "fp-tab" + (i === activeFloorIndex ? " fp-tab--active" : "");
+      btn.textContent = floor.label;
+      btn.addEventListener("click", () => {
+        activeFloorIndex = i;
+        renderTabs();
+        renderFloor();
+      });
+      tabsEl.appendChild(btn);
+    });
+  }
+
+  function renderFloor() {
+    const floor = d.floorPlans[activeFloorIndex];
+
+    const rectsMarkup = floor.rooms
+      .map((room, i) => {
+        const cx = room.x + room.width / 2;
+        const cy = room.y + room.height / 2;
+        return `
+          <g class="${roomClass(room)}" data-room-index="${i}">
+            <rect x="${room.x}" y="${room.y}" width="${room.width}" height="${room.height}" rx="6"></rect>
+            <text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle"
+                  style="font-size:${fontSizeFor(room)}px">${room.name}</text>
+          </g>`;
+      })
+      .join("");
+
+    svgWrap.innerHTML = `
+      <svg viewBox="${floor.viewBox}" preserveAspectRatio="xMidYMid meet"
+           role="img" aria-label="Sơ đồ ${floor.label}">
+        ${rectsMarkup}
+      </svg>`;
+
+    listEl.innerHTML = "";
+    floor.rooms.forEach((room, i) => {
+      const g = svgWrap.querySelector(`[data-room-index="${i}"]`);
+      const photo = room.roomRef ? findPhoto(room.roomRef) : null;
+
+      if (photo) {
+        g.addEventListener("click", () => openLightboxByPath(photo));
+      }
+
+      if (room.type === "core") return;
+
+      const li = document.createElement("li");
+      li.className = "fp-list-item" + (photo ? " fp-list-item--clickable" : "");
+      li.textContent = room.name;
+      li.addEventListener("mouseenter", () => g.classList.add("fp-room--hover"));
+      li.addEventListener("mouseleave", () => g.classList.remove("fp-room--hover"));
+      if (photo) li.addEventListener("click", () => openLightboxByPath(photo));
+      listEl.appendChild(li);
+    });
+  }
+
+  renderTabs();
+  renderFloor();
 }
 
 function loadBackgroundPhoto(src, elementId, fallbackSrc) {
@@ -259,4 +348,5 @@ document.getElementById("tour-form").addEventListener("submit", (e) => {
 });
 
 populateContent();
+renderFloorPlans();
 loadGallery();

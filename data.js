@@ -23,6 +23,84 @@ const propertyData = {
     { images: ["gallery/24.jpg", "gallery/25.jpg"], name: "Sân thượng", caption: "Rộng rãi, mái kính lấy sáng, view toàn cảnh thành phố" },
   ],
 
+  // Sơ đồ mặt bằng từng tầng — minh họa, kích thước tương đối (không theo tỉ lệ thật).
+  // Mỗi phòng có thể có "roomRef" trỏ tới đúng "name" trong mảng rooms[] ở trên để
+  // bấm vào phòng sẽ mở ảnh tương ứng. Để trống roomRef nếu phòng đó chưa có ảnh riêng.
+  // type: "core" = khu vực kỹ thuật (thang bộ/thang máy, không bấm được)
+  //       "outdoor" = ban công/sân ngoài trời (viền nét đứt)
+  //       (không có type) = phòng thường
+  floorPlans: [
+    {
+      id: "t1",
+      label: "Tầng 1",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Gara / Sảnh vào", x: 0, y: 0, width: 500, height: 440 },
+        { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "WC chung", x: 0, y: 760, width: 200, height: 440, roomRef: "Phòng tắm" },
+        { name: "Sân sau", x: 200, y: 760, width: 300, height: 440, type: "outdoor" },
+      ],
+    },
+    {
+      id: "t2",
+      label: "Tầng 2",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Ban công", x: 0, y: 0, width: 500, height: 60, type: "outdoor" },
+        { name: "Phòng khách", x: 0, y: 60, width: 500, height: 380, roomRef: "Phòng khách" },
+        { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "Bếp + Ăn", x: 0, y: 760, width: 320, height: 440, roomRef: "Bếp" },
+        { name: "WC", x: 320, y: 760, width: 180, height: 440, roomRef: "Phòng tắm" },
+      ],
+    },
+    {
+      id: "t3",
+      label: "Tầng 3",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Phòng ngủ 1", x: 0, y: 0, width: 350, height: 440, roomRef: "Phòng ngủ" },
+        { name: "WC1", x: 350, y: 0, width: 150, height: 440, roomRef: "Phòng tắm" },
+        { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "Phòng ngủ 2", x: 0, y: 760, width: 350, height: 440, roomRef: "Phòng ngủ" },
+        { name: "WC2", x: 350, y: 760, width: 150, height: 440, roomRef: "Phòng tắm" },
+      ],
+    },
+    {
+      id: "t4",
+      label: "Tầng 4",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Phòng ngủ 3", x: 0, y: 0, width: 350, height: 440, roomRef: "Phòng ngủ" },
+        { name: "WC3", x: 350, y: 0, width: 150, height: 440, roomRef: "Phòng tắm" },
+        { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "Phòng ngủ 4", x: 0, y: 760, width: 350, height: 440, roomRef: "Phòng ngủ" },
+        { name: "WC4", x: 350, y: 760, width: 150, height: 440, roomRef: "Phòng tắm" },
+      ],
+    },
+    {
+      id: "t5",
+      label: "Tầng 5",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Ban công", x: 0, y: 0, width: 500, height: 60, type: "outdoor" },
+        { name: "Phòng thờ", x: 0, y: 60, width: 500, height: 380, roomRef: "Phòng thờ" },
+        { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "Phòng ngủ 5", x: 0, y: 760, width: 330, height: 440, roomRef: "Phòng ngủ" },
+        { name: "WC5", x: 330, y: 760, width: 170, height: 440, roomRef: "Phòng tắm" },
+      ],
+    },
+    {
+      id: "tum",
+      label: "Tầng thượng (Tum)",
+      viewBox: "0 0 500 1200",
+      rooms: [
+        { name: "Sân thượng", x: 0, y: 0, width: 500, height: 440, roomRef: "Sân thượng", type: "outdoor" },
+        { name: "Phòng kỹ thuật / Kho", x: 0, y: 440, width: 500, height: 320, type: "core" },
+        { name: "Sân thượng", x: 0, y: 760, width: 500, height: 440, roomRef: "Sân thượng", type: "outdoor" },
+      ],
+    },
+  ],
+
   // Tên icon Tabler (không có tiền tố "ti-") — xem thêm tại tabler.io/icons
   features: [
     { icon: "elevator", label: "Thang máy riêng" },
