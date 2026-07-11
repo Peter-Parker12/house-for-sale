@@ -37,8 +37,7 @@ const propertyData = {
       rooms: [
         { name: "Gara / Sảnh vào", x: 0, y: 0, width: 500, height: 440 },
         { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
-        { name: "WC chung", x: 0, y: 760, width: 200, height: 440, roomRef: "Phòng tắm" },
-        { name: "Sân sau", x: 200, y: 760, width: 300, height: 440, type: "outdoor" },
+        { name: "WC chung", x: 0, y: 760, width: 500, height: 440, roomRef: "Phòng tắm" },
       ],
     },
     {
@@ -95,8 +94,7 @@ const propertyData = {
       viewBox: "0 0 500 1200",
       rooms: [
         { name: "Sân thượng", x: 0, y: 0, width: 500, height: 440, roomRef: "Sân thượng", type: "outdoor" },
-        { name: "Phòng kỹ thuật / Kho", x: 0, y: 440, width: 500, height: 320, type: "core" },
-        { name: "Sân thượng", x: 0, y: 760, width: 500, height: 440, roomRef: "Sân thượng", type: "outdoor" },
+        { name: "Phòng kỹ thuật / Kho", x: 0, y: 440, width: 500, height: 760, type: "core" },
       ],
     },
   ],
