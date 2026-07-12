@@ -79,7 +79,8 @@ const propertyData = {
       label: "Tầng 5",
       viewBox: "0 0 500 1200",
       rooms: [
-        { name: "Phòng quần áo - WC", x: 0, y: 0, width: 500, height: 440, roomRef: "Phòng tắm" },
+        { name: "Phòng quần áo", x: 0, y: 0, width: 330, height: 440 },
+        { name: "WC", x: 330, y: 0, width: 170, height: 440, roomRef: "Phòng tắm" },
         { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
         { name: "Phòng ngủ 5", x: 0, y: 760, width: 330, height: 440, roomRef: "Phòng ngủ" },
         { name: "WC5", x: 330, y: 760, width: 170, height: 440, roomRef: "Phòng tắm" },
