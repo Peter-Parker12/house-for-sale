@@ -202,71 +202,6 @@ h2 {
   opacity: 0.9;
 }
 
-/* Tour bar */
-.tour-bar-wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-}
-
-.tour-bar {
-  margin-top: -34px;
-  position: relative;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: 0 14px 30px rgba(46, 42, 34, 0.1);
-  padding: 20px 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 18px;
-  align-items: end;
-}
-
-.tour-field label {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 6px;
-}
-
-.tour-field input {
-  width: 100%;
-  font: inherit;
-  font-size: 13px;
-  padding: 6px 0;
-  border: none;
-  border-bottom: 1px solid var(--line);
-  background: transparent;
-}
-
-.tour-field input:focus {
-  outline: none;
-  border-bottom-color: var(--green);
-}
-
-.tour-bar button {
-  font: inherit;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 11px 18px;
-  border: 1px solid var(--green);
-  border-radius: 18px;
-  background: var(--green);
-  color: var(--paper);
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.tour-bar button:hover {
-  background: var(--green-deep);
-  border-color: var(--green-deep);
-}
-
 /* Sections */
 .section {
   max-width: 1040px;
@@ -780,10 +715,6 @@ h2 {
 @media (max-width: 640px) {
   .price {
     font-size: 32px;
-  }
-  .tour-bar {
-    grid-template-columns: 1fr;
-    margin-top: 16px;
   }
   .facts-row {
     flex-wrap: wrap;

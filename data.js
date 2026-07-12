@@ -45,11 +45,9 @@ const propertyData = {
       label: "Tầng 2",
       viewBox: "0 0 500 1200",
       rooms: [
-        { name: "Ban công", x: 0, y: 0, width: 500, height: 60, type: "outdoor" },
-        { name: "Phòng khách", x: 0, y: 60, width: 500, height: 380, roomRef: "Phòng khách" },
+        { name: "Phòng khách", x: 0, y: 0, width: 500, height: 440, roomRef: "Phòng khách" },
         { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
-        { name: "Bếp + Ăn", x: 0, y: 760, width: 320, height: 440, roomRef: "Bếp" },
-        { name: "WC", x: 320, y: 760, width: 180, height: 440, roomRef: "Phòng tắm" },
+        { name: "Bếp + Ăn", x: 0, y: 760, width: 500, height: 440, roomRef: "Bếp" },
       ],
     },
     {
@@ -81,8 +79,7 @@ const propertyData = {
       label: "Tầng 5",
       viewBox: "0 0 500 1200",
       rooms: [
-        { name: "Ban công", x: 0, y: 0, width: 500, height: 60, type: "outdoor" },
-        { name: "Phòng thờ", x: 0, y: 60, width: 500, height: 380, roomRef: "Phòng thờ" },
+        { name: "Phòng quần áo - WC", x: 0, y: 0, width: 500, height: 440, roomRef: "Phòng tắm" },
         { name: "Thang bộ + Thang máy", x: 0, y: 440, width: 500, height: 320, type: "core" },
         { name: "Phòng ngủ 5", x: 0, y: 760, width: 330, height: 440, roomRef: "Phòng ngủ" },
         { name: "WC5", x: 330, y: 760, width: 170, height: 440, roomRef: "Phòng tắm" },
@@ -94,7 +91,7 @@ const propertyData = {
       viewBox: "0 0 500 1200",
       rooms: [
         { name: "Sân thượng", x: 0, y: 0, width: 500, height: 440, roomRef: "Sân thượng", type: "outdoor" },
-        { name: "Phòng kỹ thuật / Kho", x: 0, y: 440, width: 500, height: 760, type: "core" },
+        { name: "Phòng thờ", x: 0, y: 440, width: 500, height: 760, roomRef: "Phòng thờ" },
       ],
     },
   ],

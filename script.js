@@ -336,17 +336,6 @@ document.getElementById("contact-form").addEventListener("submit", (e) => {
   });
 });
 
-document.getElementById("tour-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const form = e.target;
-  sendInquiry({
-    form,
-    note: document.getElementById("tour-note"),
-    subject: `Đặt lịch xem nhà: ${propertyData.address}`,
-    body: `Họ tên: ${form.name.value}\nSố điện thoại: ${form.phone.value}\nNgày mong muốn: ${form.date.value}`,
-  });
-});
-
 populateContent();
 renderFloorPlans();
 loadGallery();
